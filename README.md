@@ -29,7 +29,7 @@ Hurric-AI-ne
 <br /><br />
 
 ## What does your app do?
-*Describe in a paragraph or so*
+Hurric-AI-ne provides timely, easily accessible Natural Disaster information for people who desperately need it. The application also includes a knowledge library to assist with natural disaster readiness so that if disaster strikes, people can be prepared. 
 
 <br /><br />
 
