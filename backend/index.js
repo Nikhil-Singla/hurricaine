@@ -1,6 +1,6 @@
 // index.js
-require("dotenv").config();
-const { Configuration, OpenAI } = require('openai');
+// require("dotenv").config();
+// const { Configuration, OpenAI } = require('openai');
 const axios = require('axios');
 const express = require('express')
 
