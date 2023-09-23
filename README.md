@@ -4,7 +4,7 @@
 
 ## Getting Started
 Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
-1. Clone this repository and rename to the name of your app or idea
+1. Clone this repository and rename it to the name of your app or idea
 2. Make it **private**
 3. Add pr@kcitp.com as a user
 4. Populate the Team, App & Challenges info below and update as needed
@@ -14,11 +14,11 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 ## Who's on your team?
 *List the full names,  email address & Github username of your teammates*
 
-1.   **Full Name**  || **fullname@company.com**  (or fullname@school.edu if you're a CS student) || **Github Username**
-2. 
-3.
-4.
-5.
+1. Mohammed Mukarram  || mohammed.mukarram@okstate.edu || mohdm2611
+2. Zachary Day || zday9@wgu.edu || zrday88
+3. Adam Khan || akhan5280@gmail.com || akhan5280
+4. Nikhil Singla || nikhil@ku.edu || Nikhil-Singla
+5. Lulu Cao || caolulu000@gmail.com || lulu-cao
 
 <br /><br />
 
@@ -26,6 +26,7 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 ## What is the name of your App?
 
 <br /><br />
+
 ## What does your app do?
 *Describe in a paragraph or so*
 
