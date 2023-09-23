@@ -24,6 +24,7 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 
 
 ## What is the name of your App?
+Hurric-AI-ne
 
 <br /><br />
 
