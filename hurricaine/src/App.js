@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Home from './Components/Home';
-import Knowledge from './Components/Knowledge';
 import SidebarMain from './Components/SidebarMain';
 import './App.css';
 
@@ -27,7 +26,6 @@ class App extends Component {
         <SidebarMain pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
         <div id="page-wrap">
           <Home />
-          <Knowledge />
         </div>
       </div>
     )
