@@ -3,16 +3,14 @@ require("dotenv").config();
 const { Configuration, OpenAI } = require('openai');
 const axios = require('axios');
 const express = require('express')
-const weatherRoute = require('./routes/weather');
-const askgptRoute = require('./routes/askgpt');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+// const openai = new OpenAI({
+//     apiKey: process.env.OPENAI_API_KEY,
+// });
 
 
 
@@ -24,7 +22,8 @@ app.get('/', (req, res) => {
   res.send('Hello there!')
 })
 
-// app.get('/askgpt', async (req, res) => {
+app.get('/askgpt', async (req, res) => {
+    res.send('GPT Endpoint')
     // const chatCompletion = await openai.chat.completions.create({
     //     model: "gpt-3.5-turbo",
     //     messages: [{"role": "user", "content": "Hello!"}],
@@ -34,13 +33,11 @@ app.get('/', (req, res) => {
     //   success: true,
     //   message: chatCompletion.choices[0].message,
     // });
-// });
+});
 
-
-app.use('/weather', weatherRoute);
-app.use('/askgpt', askgptRoute);
-
- 
+app.get('/weather', async (req, res) => {
+    res.send('Weather Endpoint');
+});
 
 
 // Export the Express API
