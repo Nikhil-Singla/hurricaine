@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 const Sidebar = () => {
   return (
-    <div>
-      <p>Local Weather Information</p>
-      <p>Area Emergency Services</p>
-      <p>Emergency Preparedness</p>
-      <p>Frequently Asked Questions</p>
+    <div className="flex flex-col">
+      <p className="w-full">Local Weather Information</p>
+      <p className="w-full">Area Emergency Services</p>
+      <p className="w-full">Emergency Preparedness</p>
+      <p className="w-full">Frequently Asked Questions</p>
     </div>
   )
 }

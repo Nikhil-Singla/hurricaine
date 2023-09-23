@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "./Searchbar";
+import Sidebar from "./Sidebar";
 
 const Knowledge = () => {
   return (
