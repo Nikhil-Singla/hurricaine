@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Home from './Components/Home';
+import SidebarMain from './Components/SidebarMain';
 import './App.css';
 
 class App extends Component {
@@ -21,9 +22,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Home />
-        <p className="App-intro">apiResponse: {this.state.apiResponse}</p>
+      <div className="App" id="outer-container">
+        <SidebarMain pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
+        <div id="page-wrap">
+          <Home />
+        </div>
       </div>
     )
   };
