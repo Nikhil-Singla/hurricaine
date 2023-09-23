@@ -4,6 +4,7 @@ const { Configuration, OpenAI } = require('openai');
 const axios = require('axios');
 const express = require('express')
 const weatherRoute = require('./routes/weather');
+const askgptRoute = require('./routes/askgpt');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -23,7 +24,7 @@ app.get('/', (req, res) => {
   res.send('Hello there!')
 })
 
-app.get('/askgpt', async (req, res) => {
+// app.get('/askgpt', async (req, res) => {
     // const chatCompletion = await openai.chat.completions.create({
     //     model: "gpt-3.5-turbo",
     //     messages: [{"role": "user", "content": "Hello!"}],
@@ -33,10 +34,11 @@ app.get('/askgpt', async (req, res) => {
     //   success: true,
     //   message: chatCompletion.choices[0].message,
     // });
-});
+// });
 
 
-app.use('/weather', weatherRoute)
+app.use('/weather', weatherRoute);
+app.use('/askgpt', askgptRoute);
 
  
 
