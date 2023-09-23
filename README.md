@@ -39,7 +39,7 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 - [ ]  Pinata Challenge
 - [ ]  Pinata ERC-6551 Challenge
 - [ ]  Okta Challenge
-- [✅]  GEHA Generative AI Emergency Response Challenge
+- [X]  GEHA Generative AI Emergency Response Challenge
 - [ ]  Corporate Challenge (only for official company teams)
 - [ ]  College Challenge (only for teams of up to 5 CS students from the same school)
 
