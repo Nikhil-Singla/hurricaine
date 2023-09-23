@@ -9,11 +9,12 @@ app.listen(PORT, () => {
 })
 
 app.get('/', (req, res) => {
-  res.send('Hey this is my API running 🥳')
+  res.send('Hello there!')
 })
 
-app.get('/about', (req, res) => {
-  res.send('This is my about route..... ')
+app.get('/askgpt', (req, res) => {
+    console.log(req)
+    res.send(req.query.query)
 })
 
 // Export the Express API
