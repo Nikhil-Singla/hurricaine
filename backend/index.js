@@ -8,9 +8,9 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+// const openai = new OpenAI({
+//     apiKey: process.env.OPENAI_API_KEY,
+// });
 
 
 
@@ -38,9 +38,6 @@ app.get('/askgpt', async (req, res) => {
 app.get('/weather', async (req, res) => {
     res.send('Weather Endpoint');
 });
-
-
- 
 
 
 // Export the Express API
