@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const Footer = () => {
   return (
     <div>
-      <p>Footer placeholder</p>
+      <p></p>
     </div>
   )
 }
