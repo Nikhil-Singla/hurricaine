@@ -37,6 +37,7 @@ const Searchbar = () => {
   };
 
   const search = () => {
+    searchInput.value = "";
     setInput(input);
     inputArray.push(input);
     console.log('inputArray');
@@ -86,8 +87,7 @@ const Searchbar = () => {
         answerContainer.appendChild(searchResultAnswer);
         answerContainer.appendChild(hurricaineIcon);
         searchResult.appendChild(answerContainer);
-
-        searchInput.innerHTML = "";
+        
         setInput("")
       })
       .catch(function (error) {
