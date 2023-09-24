@@ -9,7 +9,7 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: white;
 }
 
 /* Color/shape of burger icon bars on hover*/
@@ -73,4 +73,55 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+.paddingBottom{
+  padding-bottom: 3px;
+}
+
+.logoCopy{
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  width: 100px;
+  height: 100px;
+}
+
+.logoText{
+  position: absolute;
+  bottom: 45px;
+  left: 100px;
+}
+
+.Loop{
+  animation: bgColor 8s infinite linear;
+}
+@keyframes bgColor {
+  12.5% {
+    color: red;
+  }
+  25% {
+    color: orange;
+  }
+  37.5% {
+    color: yellow;
+  }
+  50% {
+    color: green;
+  }
+  62.5% {
+    color: lightblue;
+
+  }
+  75% {
+    color: blue;
+
+  }
+  87.5% {
+    color: blueviolet;
+  }
+
+  100% {
+    color: magenta;
+  }
 }

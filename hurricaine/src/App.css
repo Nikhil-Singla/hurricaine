@@ -21,7 +21,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -43,6 +42,7 @@
 .map-container {
   height: 400px;
   width: 400px;
+  float: right;
 }
 
 .sidebar {
@@ -52,7 +52,7 @@
   font-family: monospace;
   z-index: 1;
   position: absolute;
-  top: 0;
+  top: 30;
   left: 0;
   margin: 12px;
   border-radius: 4px;

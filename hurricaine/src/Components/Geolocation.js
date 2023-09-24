@@ -1,28 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useGeolocated } from "react-geolocated";
 
 const Geolocation = () => {
-    const { coords, timestamp, isGeolocationAvailable, isGeolocationEnabled } =
-        useGeolocated({
-            positionOptions: {
-                enableHighAccuracy: false,
-            },
-            userDecisionTimeout: 5000,
-        });
+  const [weatherIconUrl, setWeatherIconUrl] = useState("");
+  const [weatherCondition, setWeatherCondition] = useState("");
+  const [locationCity, setLocationCity] = useState("");
+  const [locationRegion, setLocationRegion] = useState("");
 
-    return !isGeolocationAvailable ? (
-        <div>Your browser does not support Geolocation</div>
-    ) : !isGeolocationEnabled ? (
-        <div>Geolocation is not enabled</div>
-    ) : coords ? (
+  const { coords, timestamp, isGeolocationAvailable, isGeolocationEnabled } =
+    useGeolocated({
+        positionOptions: {
+            enableHighAccuracy: false,
+        },
+        userDecisionTimeout: 5000,
+    });
+
+    useEffect(()=>{
+      if (isGeolocationAvailable && isGeolocationEnabled && coords) {
+        axios.post('https://62e1-23-228-186-78.ngrok-free.app/weather', {
+          "latitude": coords.latitude,
+          "longitude": coords.longitude
+        })
+        .then(function (response) {
+          console.log(response);
+          setLocationCity(response.location.name);
+          setLocationRegion(response.location.region);
+          setWeatherCondition(response.current.condition.text);
+          setWeatherIconUrl(response.current.condition.icon);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+    }, [])
+
+  return (
+    <div>
       <div>
-        Your latitude: {coords.latitude}<br/>
-        Your longitude: {coords.longitude}<br/>
-        Your current timestamp: {timestamp}
+        <img src={`https:${weatherIconUrl}`} alt={weatherCondition} />
+        <p>{weatherCondition}</p>
       </div>
-    ) : (
-        <div>Getting the location data&hellip; </div>
-    );
+      <div>{locationCity}, {locationRegion}</div>
+    </div>
+  )
 };
 
 export default Geolocation;
