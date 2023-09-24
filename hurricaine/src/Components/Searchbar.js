@@ -11,6 +11,7 @@ const Searchbar = () => {
   const inputArray = [];
   const answerArray = [];
   const [speechStart, setSpeechStart] = useState(false);
+  const searchInput = document.getElementById("search-input");
   const [searchBarClass, setSearchBarClass] = useState("flex justify-center align-middle mt-40");
   const createRequestBody = () => {
     const requestBody = [];
@@ -36,17 +37,11 @@ const Searchbar = () => {
   };
 
   const search = () => {
-    const searchInput = document.getElementById("search-input");
-    if (!searchInput) {
-      searchInput.innerHTML = "Please enter your question here..."
-      return
-    }
     setInput(input);
     inputArray.push(input);
     console.log('inputArray');
     console.log(inputArray);
     const searchResult = document.getElementById("searchResult");
-    const searchResultInput = document.createElement("div");
     const userIcon = document.createElement("img");
 
     const messageContainer = document.createElement("div");
@@ -59,6 +54,7 @@ const Searchbar = () => {
     userIcon.style.width = '28px';
     userIcon.style.borderRadius = "50%";
 
+    const searchResultInput = document.createElement("div");
     searchResultInput.innerHTML = input;
     searchResultInput.style.paddingLeft = "10px";
 
@@ -68,7 +64,7 @@ const Searchbar = () => {
     messageContainer.style.paddingBottom = "10px";
     searchResult.appendChild(messageContainer);
 
-    axios.post('https://efa7-23-228-186-78.ngrok-free.app/askgpt', createRequestBody())
+    axios.post('https://9079-23-228-186-78.ngrok-free.app/askgpt', createRequestBody())
       .then(function (response) {
         console.log('response');
         console.log(response);
@@ -99,6 +95,16 @@ const Searchbar = () => {
       })
   };
 
+  const handleSearch = () => {
+    if (!searchInput) {
+      console.log("!!!!!! No search input");
+      return searchInput.innerHTML = "Please enter your question here..."
+    } else {
+      console.log("start searching....");
+      search()
+    }
+  };
+
   const {
     transcript,
     listening,
@@ -120,7 +126,7 @@ const Searchbar = () => {
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      search();
+      handleSearch();
     }
   };
 
@@ -159,7 +165,7 @@ const Searchbar = () => {
               </svg>
             </div>
           }
-          <div class="searchElement" onClick={search}>
+          <div class="searchElement" onClick={handleSearch}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
