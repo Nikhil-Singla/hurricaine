@@ -9,8 +9,8 @@ import Map from "./Map";
 
 const Searchbar = () => {
   const [input, setInput] = useState("");
+  const [answerArray, setAnswerArray] = useState("");
   const inputArray = [];
-  const answerArray = [];
   const [speechStart, setSpeechStart] = useState(false);
   const [placeholder, setPlaceholder] = useState("");
   const searchInput = document.getElementById("search-input");
@@ -18,7 +18,11 @@ const Searchbar = () => {
   const [searchBarClass, setSearchBarClass] = useState("flex justify-center align-middle mt-40");
   const createRequestBody = () => {
     const requestBody = [];
-    for (let i = 0; i < inputArray.length - 2; i++) {
+    console.log('inputArray');
+    console.log(inputArray);
+    console.log('answerArray');
+    console.log(answerArray);
+    for (let i = 0; i < inputArray.length - 1; i++) {
       requestBody.push({
         "role": "user",
         "content": inputArray[i]
@@ -77,12 +81,23 @@ const Searchbar = () => {
         console.log(response.data);
         setSearchBarClass("searchBar");
 
-        const searchResultAnswer = document.createElement("p");
-        response.data.forEach(element => {
-          answerArray.push(element.content);
-          searchResultAnswer.innerHTML += element.content + " "
-        });
         const answerContainer = document.createElement("div");
+        const answerParagraph = document.createElement("div");
+        response.data.forEach(element => {
+          if (element) { // element is null sometimes
+            const searchResultAnswer = document.createElement("p");
+            const searchResultBreak = document.createElement("br");
+            searchResultBreak.style.height = "10px";
+            searchResultAnswer.innerHTML = element.content;
+            answerParagraph.appendChild(searchResultAnswer);
+            answerParagraph.appendChild(searchResultBreak);
+          }
+        });
+
+        setAnswerArray([...answerArray, response.data]);
+        console.log('answerArray in progress');
+        console.log(answerArray);
+
         answerContainer.style.display = 'flex';
         answerContainer.style.justifyContent = "flex-end";
         answerContainer.style.alignItems = 'center';
@@ -94,7 +109,7 @@ const Searchbar = () => {
         hurricaineIcon.style.width = '50px';
         hurricaineIcon.style.borderRadius = "50%";
 
-        answerContainer.appendChild(searchResultAnswer);
+        answerContainer.appendChild(answerParagraph);
         answerContainer.appendChild(hurricaineIcon);
 
         searchResult.appendChild(answerContainer);

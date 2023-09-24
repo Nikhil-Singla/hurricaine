@@ -41,7 +41,7 @@ const Geolocation = () => {
         <img src={`https:${weatherIconUrl}`} alt={weatherCondition} />
         <p>{weatherCondition}</p>
       </div>
-      <div>{locationCity}, {locationRegion}</div>
+      <div>{locationCity} {locationRegion}</div>
     </div>
   )
 };
