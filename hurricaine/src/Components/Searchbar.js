@@ -152,7 +152,7 @@ const Searchbar = () => {
       <div className={searchBarClass}>
         <div className="searchBoundary">
           {/* defaultValue is needed for speech transcript */}
-          <input class="inputBar" id="search-input" defaultValue={input} placeholder={placeholder} onInput={e => setInput(e.target.value)} onKeyDown={handleKeyPress} />
+          <input className="inputBar" id="search-input" defaultValue={input} placeholder={placeholder} onInput={e => setInput(e.target.value)} onKeyDown={handleKeyPress} />
           {!speechStart ?
             <div class="innerElement">
               {!browserSupportsSpeechRecognition ?
