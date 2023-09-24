@@ -73,13 +73,14 @@ const Searchbar = () => {
     axios.post('https://9079-23-228-186-78.ngrok-free.app/askgpt', createRequestBody())
       .then(function (response) {
         console.log('response');
-        console.log(response);
-        answerArray.push(response.data);
+        console.log(response.data);
         setSearchBarClass("searchBar")
 
         const searchResultAnswer = document.createElement("p");
-        searchResultAnswer.innerHTML = response.data;
-
+        response.data.forEach(element => {
+          answerArray.push(element.content);
+          searchResultAnswer.innerHTML += element.content + " "
+        });
         const answerContainer = document.createElement("div");
         answerContainer.style.display = 'flex';
         answerContainer.style.justifyContent = "flex-end";
@@ -96,7 +97,7 @@ const Searchbar = () => {
         answerContainer.appendChild(hurricaineIcon);
 
         searchResult.appendChild(answerContainer);
-        
+
         setInput("")
       })
       .catch(function (error) {
@@ -106,7 +107,7 @@ const Searchbar = () => {
 
   const handleSearch = () => {
     if (!input) {
-      return setPlaceholder("Please enter your question here...")
+      return setPlaceholder("Please enter your question: e.g. where is the nearest hospital?")
     } else {
       search()
     }
