@@ -1,6 +1,6 @@
 // index.js
-// require("dotenv").config();
-// const { Configuration, OpenAI } = require('openai');
+require("dotenv").config();
+const { Configuration, OpenAI } = require('openai');
 const axios = require('axios');
 const express = require('express')
 
@@ -8,11 +8,13 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 
-// const openai = new OpenAI({
-//     apiKey: process.env.OPENAI_API_KEY,
-// });
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
-
+app.use(
+    express.json()
+);
 
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `)
@@ -35,8 +37,17 @@ app.get('/askgpt', async (req, res) => {
     // });
 });
 
-app.get('/weather', async (req, res) => {
-    res.send('Weather Endpoint');
+app.post('/weather', async (req, res) => {
+    console.log(req.body.latitude);
+    console.log(req.body.longitude);
+    finalData = {}
+    axios.get('https://api.weatherapi.com/v1/forecast.json?key=64817355ccfe46609a6221118232309&q='+req.body.latitude+','+req.body.longitude+'&alerts=yes').then(resp => {
+        axios.get('https://api.weatherapi.com/v1/current.json?key=64817355ccfe46609a6221118232309&q='+req.body.latitude+','+req.body.longitude+'&alerts=yes').then(respOne => {
+            // console.log(resp.data);
+            finalData = Object.assign(resp.data, respOne.data);
+            res.send(finalData);
+        });
+    });
 });
 
 
