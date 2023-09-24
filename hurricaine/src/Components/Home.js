@@ -9,8 +9,8 @@ const Home = () => {
   return (
     <div>
       <Nav />
-      <Searchbar />
       <Map />
+      <Searchbar />
       <Geolocation />
       <Footer />
     </div>

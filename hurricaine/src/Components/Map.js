@@ -1,15 +1,15 @@
 import React from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
- 
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibW9oZG0yNjExIiwiYSI6ImNsbXdvNmM2MDEzYWEya3Z6MGFzaGp5NXUifQ.CcedzXAgZolCGGcztTdE5w';
- 
+
 export default class Map extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-        lng: -70.9,
-        lat: 42.35,
-        zoom: 9
+        lng: -93.85,
+        lat: 38.52,
+        zoom: 10
         };
         this.mapContainer = React.createRef();
     }
@@ -21,7 +21,7 @@ export default class Map extends React.PureComponent {
         center: [lng, lat],
         zoom: zoom
     });
- 
+
     map.on('move', () => {
         this.setState({
         lng: map.getCenter().lng.toFixed(4),
@@ -33,10 +33,12 @@ export default class Map extends React.PureComponent {
     render() {
         const { lng, lat, zoom } = this.state;
         return (
-        <div>
-            <div ref={this.mapContainer} className="map-container">
-                <div className="sidebar">
-                    Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+        <div className='w-1/2'>
+            <div>
+                <div ref={this.mapContainer} className="map-container">
+                    <div className="sidebar">
+                        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                    </div>
                 </div>
             </div>
         </div>
