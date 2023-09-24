@@ -17,8 +17,6 @@
 }
 
 .searchBoundary{
-    width: 40vw;
-    height: 5vh;
     border: 2px solid #ccc;
     border-radius: 4px;
     display: flex;
@@ -26,8 +24,6 @@
 }
 
 .inputBar{
-    width: 100%;
-    min-width: fit-content;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     background-color: #000;
