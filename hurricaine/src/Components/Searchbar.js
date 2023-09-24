@@ -122,9 +122,11 @@ const Searchbar = () => {
 
   const listen = () => {
     if (speechStart === false) {
+      console.log("start listening");
       SpeechRecognition.startListening();
       setSpeechStart(true)
     } else {
+      console.log("stop listening");
       setInput(transcript)
       SpeechRecognition.stopListening()
       setSpeechStart(false)
@@ -149,7 +151,8 @@ const Searchbar = () => {
       </div>
       <div className={searchBarClass}>
         <div className="w-1/2 h-12 border-2 border-grey-500 rounded flex justify-end">
-          <input class="inputBar" id="search-input" placeholder={placeholder} onInput={e=>setInput(e.target.value)} onKeyDown={handleKeyPress}  />
+          {/* defaultValue is needed for speech transcript */}
+          <input class="inputBar" id="search-input" defaultValue={input} placeholder={placeholder} onInput={e=>setInput(e.target.value)} onKeyDown={handleKeyPress}  />
           {!speechStart ?
             <div class="innerElement">
               { !browserSupportsSpeechRecognition ?
