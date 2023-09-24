@@ -2,10 +2,11 @@
 require("dotenv").config();
 const { Configuration, OpenAI } = require('openai');
 const axios = require('axios');
-const express = require('express')
+const express = require('express');
 
+const OPENAI_API_URL = 'https://api.openai.com/v1/engines/davinci-codex/completions'; 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 
 const openai = new OpenAI({
@@ -13,28 +14,80 @@ const openai = new OpenAI({
 });
 
 app.use(
+  // function(req, res, next) {
+  //   res.setHeader('Access-Control-Allow-Origin', '*');
+  //   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  //   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  //   res.setHeader('Access-Control-Allow-Credentials', true);
     express.json()
 );
 
 app.listen(PORT, () => {
-  console.log(`API listening on PORT ${PORT} `)
+  console.log(`API listening on PORT ${PORT} `);
 })
 
 app.get('/', (req, res) => {
-  res.send('Hello there!')
+    const userPrompt = "I was part of an earthquake, help me";
+    // generateSuggestedQuestions(userPrompt);
+    //   .then(suggestedQuestions => {
+    //     console.log('Suggested Questions:');
+    //     suggestedQuestions.forEach((question, index) => {
+    //       console.log(`${index + 1}. ${question}`);
+    //     });
+    //   })
+    //   .catch(error => {
+    //     // Handle errors
+    //     console.error('Error:', error);
+    //   });
+    res.send('Hello there!')
 })
 
-app.get('/askgpt', async (req, res) => {
-    res.send('GPT Endpoint')
+app.post('/askgpt', async (req, res) => {
+    const chats = req.body;
+    const userPrompt = chats[0]['content'];
+    try{
+      const result = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [{"role": "user", "content": chats[0]['content']}],
+        messages: chats,
+        max_tokens: 100
+      });
+      var responseData = result.choices[0].message;
+      var finalResponse = []
+      // try{
+      //   var suggestedResponse = await generateSuggestedQuestions(userPrompt);
+        
+      // }catch (error) {
+      //   console.error('Error generating suggested questions:', error);
+      //   throw error;
+      // }finally{
+      //   finalResponse.push(responseData);
+      //   finalResponse.push(suggestedResponse);
+      //   console.log(finalResponse);
+      // }
+      res.send(responseData);
+    }
+    catch (error) {
+      console.error('Error generating suggested questions:', error);
+      throw error;
+    }
+    
+    
+    // console.log(result);
+    // res.json({
+    //     output: result.choices[0].message,
+    // });
+    // res.send('GPT Endpoint')
     // const chatCompletion = await openai.chat.completions.create({
     //     model: "gpt-3.5-turbo",
-    //     messages: [{"role": "user", "content": "Hello!"}],
+        // messages: [{"role": "user", "content": "Hello!"}],
     //   });
     // console.log(chatCompletion);
     // return res.status(200).json({
     //   success: true,
     //   message: chatCompletion.choices[0].message,
     // });
+
 });
 
 app.post('/weather', async (req, res) => {
@@ -50,6 +103,23 @@ app.post('/weather', async (req, res) => {
     });
 });
 
+async function generateSuggestedQuestions(prompt) {
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [{"role": "system", "content": `Generate related follow up questions to provide help to the human based on the following:\n\n${prompt}`}],
+        max_tokens: 50, // Adjust the number of tokens as needed
+        },
+      );
+      const suggestedQuestions = response.choices[0].message;
+      console.log(suggestedQuestions);
+      return suggestedQuestions;
+    } catch (error) {
+      console.error('Error generating suggested questions:', error);
+      throw error;
+    }
+  }
 
 // Export the Express API
 module.exports = app
+
