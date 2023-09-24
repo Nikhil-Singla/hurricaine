@@ -3,6 +3,8 @@ import axios from 'axios';
 import './Searchbar.css';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import userProfileIcon from '../assets/userProfilePicture.png';
+import Tornado from '../assets/Tornado.png';
+import Map from "./Map";
 
 const Searchbar = () => {
   const [input, setInput] = useState("");
@@ -14,15 +16,15 @@ const Searchbar = () => {
     const searchInput = document.getElementById("searchInput");
     const searchResultInput = document.createElement("div");
     const userIcon = document.createElement("img");
-    
+
     const messageContainer = document.createElement("div");
     messageContainer.style.display = 'flex';
     messageContainer.style.alignItems = 'center';
-
+    messageContainer.style.marginBottom = "20px";
 
     userIcon.src = userProfileIcon;
-    userIcon.style.height = '30px';
-    userIcon.style.width = '30px';
+    userIcon.style.height = '28px';
+    userIcon.style.width = '28px';
     userIcon.style.borderRadius = "50%";
 
     searchResultInput.innerHTML = input;
@@ -33,16 +35,27 @@ const Searchbar = () => {
 
     messageContainer.style.paddingBottom = "10px";
     searchResult.appendChild(messageContainer);
-    
+
     axios.get(`https://hackwidwest-backend.vercel.app/askgpt?query=${input}`)
       .then(function (response) {
         console.log(response);
         setSearchBarClass("absolute bottom-0 flex justify-center align-middle my-20 w-full")
-        
-        const searchResultAnswer = document.createElement("div");
-        searchResultAnswer.innerHTML = response.data;
 
-        searchResult.appendChild(searchResultAnswer);
+        const searchResultAnswer = document.createElement("p");
+        searchResultAnswer.innerHTML = response.data;
+        const answerContainer = document.createElement("div");
+        answerContainer.style.display = 'flex';
+        answerContainer.style.justifyContent = "flex-end";
+        answerContainer.style.alignItems = 'center';
+        answerContainer.style.marginBottom = "20px";
+        const hurricaineIcon = document.createElement("img");
+        hurricaineIcon.src = Tornado;
+        hurricaineIcon.style.height = '50px';
+        hurricaineIcon.style.width = '50px';
+        hurricaineIcon.style.borderRadius = "50%";
+        answerContainer.appendChild(searchResultAnswer);
+        answerContainer.appendChild(hurricaineIcon);
+        searchResult.appendChild(answerContainer);
         searchInput.innerHTML = "";
 
 
@@ -80,9 +93,12 @@ const Searchbar = () => {
 
   return (
     <div className="convo-box">
-      <div className="flex w-full justify-center">
-        <div className="w-1/2 text-start" id="searchResult">
+      <div className="overflow-scroll search-result-container">
+        <div className="flex w-full justify-center">
+          <div className="w-1/2 text-start" id="searchResult">
+          </div>
         </div>
+      {input.includes("where") ? <Map className="w-full" /> : <br/>}
       </div>
       <div className={searchBarClass}>
         <div className="w-1/2 h-12 border-2 border-grey-500 rounded flex justify-end">
