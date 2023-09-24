@@ -1,0 +1,32 @@
+.Loop{
+    animation: bgColor 8s infinite linear;
+  }
+  @keyframes bgColor {
+    12.5% {
+      color: red;
+    }
+    25% {
+      color: orange;
+    }
+    37.5% {
+      color: yellow;
+    }
+    50% {
+      color: green;
+    }
+    62.5% {
+      color: lightblue;
+  
+    }
+    75% {
+      color: blue;
+  
+    }
+    87.5% {
+      color: blueviolet;
+    }
+  
+    100% {
+      color: magenta;
+    }
+  }
