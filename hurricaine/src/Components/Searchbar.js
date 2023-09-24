@@ -47,6 +47,13 @@ const Searchbar = () => {
     }
   }
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      search();
+    }
+  };
+
   return (
     <div>
       <div className="flex w-full justify-center">
@@ -55,7 +62,7 @@ const Searchbar = () => {
       </div>
       <div className={searchBarClass}>
         <div className="w-1/2 h-12 border-2 border-grey-500 rounded flex justify-end">
-          <input class="inputBar" defaultValue={input} onInput={e=>setInput(e.target.value)} />
+          <input class="inputBar" defaultValue={input} onInput={e=>setInput(e.target.value)} onKeyDown={handleKeyPress}  />
           {!speechStart ?
             <div class="innerElement">
               { !browserSupportsSpeechRecognition ?
