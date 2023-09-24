@@ -142,7 +142,7 @@ const Searchbar = () => {
 
   return (
     <div className="convo-box">
-      <div className="overflow-hidden search-result-container" id="Scroller">
+      <div className="overflow-scroll search-result-container" id="Scroller">
         <div className="flex w-full justify-center">
           <div className="w-1/2 text-start" id="searchResult" >
           </div>
