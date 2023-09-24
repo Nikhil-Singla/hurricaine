@@ -8,12 +8,44 @@ import Map from "./Map";
 
 const Searchbar = () => {
   const [input, setInput] = useState("");
+  const inputArray = [];
+  const answerArray = [];
   const [speechStart, setSpeechStart] = useState(false);
   const [searchBarClass, setSearchBarClass] = useState("flex justify-center align-middle mt-40");
+  const createRequestBody = () => {
+    const requestBody = [];
+    for (let i=0; i<inputArray.length-2; i++) {
+      requestBody.push({
+        "role": "user",
+        "content": inputArray[i]
+      });
+      if (answerArray[i]) {
+        requestBody.push({
+          "role": "user",
+          "content": answerArray[i]
+        })
+      }
+    };
+    requestBody.push({
+      "role": "user",
+      "content": inputArray[inputArray.length-1]
+    });
+    console.log('requestBody');
+    console.log(requestBody);
+    return requestBody
+  };
+
   const search = () => {
+    const searchInput = document.getElementById("search-input");
+    if (!searchInput) {
+      searchInput.innerHTML = "Please enter your question here..."
+      return
+    }
     setInput(input);
+    inputArray.push(input);
+    console.log('inputArray');
+    console.log(inputArray);
     const searchResult = document.getElementById("searchResult");
-    const searchInput = document.getElementById("searchInput");
     const searchResultInput = document.createElement("div");
     const userIcon = document.createElement("img");
 
@@ -36,9 +68,11 @@ const Searchbar = () => {
     messageContainer.style.paddingBottom = "10px";
     searchResult.appendChild(messageContainer);
 
-    axios.get(`https://hackwidwest-backend.vercel.app/askgpt?query=${input}`)
+    axios.post('https://efa7-23-228-186-78.ngrok-free.app/askgpt', createRequestBody())
       .then(function (response) {
+        console.log('response');
         console.log(response);
+        answerArray.push(response.data);
         setSearchBarClass("absolute bottom-0 flex justify-center align-middle my-20 w-full")
 
         const searchResultAnswer = document.createElement("p");
@@ -56,9 +90,8 @@ const Searchbar = () => {
         answerContainer.appendChild(searchResultAnswer);
         answerContainer.appendChild(hurricaineIcon);
         searchResult.appendChild(answerContainer);
+
         searchInput.innerHTML = "";
-
-
         setInput("")
       })
       .catch(function (error) {
@@ -102,7 +135,7 @@ const Searchbar = () => {
       </div>
       <div className={searchBarClass}>
         <div className="w-1/2 h-12 border-2 border-grey-500 rounded flex justify-end">
-          <input class="inputBar" defaultValue={input} onInput={e=>setInput(e.target.value)} onKeyDown={handleKeyPress}  />
+          <input class="inputBar" id="search-input" onInput={e=>setInput(e.target.value)} onKeyDown={handleKeyPress}  />
           {!speechStart ?
             <div class="innerElement">
               { !browserSupportsSpeechRecognition ?
