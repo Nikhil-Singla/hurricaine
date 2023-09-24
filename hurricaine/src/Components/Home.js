@@ -3,10 +3,11 @@ import Footer from "./Footer";
 import Nav from "./Nav";
 import Searchbar from "./Searchbar";
 import Geolocation from "./Geolocation";
+import "./Home.css"
 
 const Home = () => {
   return (
-    <div>
+    <div className="wholePage">
       <Nav />
       <Searchbar />
       <Geolocation />
