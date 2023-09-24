@@ -3,6 +3,7 @@ require("dotenv").config();
 const { Configuration, OpenAI } = require('openai');
 const axios = require('axios');
 const express = require('express');
+const cors = require('cors');
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/engines/davinci-codex/completions'; 
 const app = express();
@@ -13,6 +14,7 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
+
 app.use(
   // function(req, res, next) {
   //   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,6 +23,8 @@ app.use(
   //   res.setHeader('Access-Control-Allow-Credentials', true);
     express.json()
 );
+
+app.use(cors());
 
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `);
@@ -48,24 +52,24 @@ app.post('/askgpt', async (req, res) => {
     try{
       const result = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
-        messages: [{"role": "user", "content": chats[0]['content']}],
+        messages: [{"role": "system", "content": chats[0]['content']}],
         messages: chats,
-        max_tokens: 100
+        max_tokens: 256
       });
       var responseData = result.choices[0].message;
       var finalResponse = []
-      // try{
-      //   var suggestedResponse = await generateSuggestedQuestions(userPrompt);
+      try{
+        var suggestedResponse = await generateSuggestedQuestions(userPrompt);
         
-      // }catch (error) {
-      //   console.error('Error generating suggested questions:', error);
-      //   throw error;
-      // }finally{
-      //   finalResponse.push(responseData);
-      //   finalResponse.push(suggestedResponse);
-      //   console.log(finalResponse);
-      // }
-      res.send(responseData);
+      }catch (error) {
+        console.error('Error generating suggested questions:', error);
+        throw error;
+      }finally{
+        finalResponse.push(responseData);
+        finalResponse.push(suggestedResponse);
+        console.log(finalResponse);
+        res.send(finalResponse);
+      }
     }
     catch (error) {
       console.error('Error generating suggested questions:', error);
@@ -94,8 +98,8 @@ app.post('/weather', async (req, res) => {
     console.log(req.body.latitude);
     console.log(req.body.longitude);
     finalData = {}
-    axios.get('https://api.weatherapi.com/v1/forecast.json?key=64817355ccfe46609a6221118232309&q='+req.body.latitude+','+req.body.longitude+'&alerts=yes').then(resp => {
-        axios.get('https://api.weatherapi.com/v1/current.json?key=64817355ccfe46609a6221118232309&q='+req.body.latitude+','+req.body.longitude+'&alerts=yes').then(respOne => {
+    axios.get('https://api.weatherapi.com/v1/forecast.json?key=' + process.env.WEATHER_KEY + '&q='+req.body.latitude+','+req.body.longitude+'&alerts=yes').then(resp => {
+        axios.get('https://api.weatherapi.com/v1/current.json?key=' + process.env.WEATHER_KEY + '&q='+req.body.latitude+','+req.body.longitude+'&alerts=yes').then(respOne => {
             // console.log(resp.data);
             finalData = Object.assign(resp.data, respOne.data);
             res.send(finalData);
@@ -107,8 +111,9 @@ async function generateSuggestedQuestions(prompt) {
     try {
       const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
-        messages: [{"role": "system", "content": `Generate related follow up questions to provide help to the human based on the following:\n\n${prompt}`}],
-        max_tokens: 50, // Adjust the number of tokens as needed
+        messages: [{"role": "system", "content": `Provide some more helpful resources and details of locations to provide help to the human based on the following:\n\n${prompt}`}],
+        max_tokens: 256,
+        temperature: 1 // Adjust the number of tokens as needed
         },
       );
       const suggestedQuestions = response.choices[0].message;
