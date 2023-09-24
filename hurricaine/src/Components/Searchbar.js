@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import './Searchbar.css';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import userProfileIcon from '../assets/userProfilePicture.png';
 
 const Searchbar = () => {
   const [input, setInput] = useState("");
@@ -12,16 +13,39 @@ const Searchbar = () => {
     const searchResult = document.getElementById("searchResult");
     const searchInput = document.getElementById("searchInput");
     const searchResultInput = document.createElement("div");
+    const userIcon = document.createElement("img");
+    
+    const messageContainer = document.createElement("div");
+    messageContainer.style.display = 'flex';
+    messageContainer.style.alignItems = 'center';
+
+
+    userIcon.src = userProfileIcon;
+    userIcon.style.height = '30px';
+    userIcon.style.width = '30px';
+    userIcon.style.borderRadius = "50%";
+
     searchResultInput.innerHTML = input;
-    searchResult.appendChild(searchResultInput);
+    searchResultInput.style.paddingLeft = "10px";
+
+    messageContainer.appendChild(searchResultInput);
+    messageContainer.insertBefore(userIcon, searchResultInput);
+
+    messageContainer.style.paddingBottom = "10px";
+    searchResult.appendChild(messageContainer);
+    
     axios.get(`https://hackwidwest-backend.vercel.app/askgpt?query=${input}`)
       .then(function (response) {
         console.log(response);
         setSearchBarClass("absolute bottom-0 flex justify-center align-middle my-20 w-full")
+        
         const searchResultAnswer = document.createElement("div");
         searchResultAnswer.innerHTML = response.data;
+
         searchResult.appendChild(searchResultAnswer);
         searchInput.innerHTML = "";
+
+
         setInput("")
       })
       .catch(function (error) {
