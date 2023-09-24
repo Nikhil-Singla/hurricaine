@@ -11,6 +11,7 @@ const Searchbar = () => {
   const inputArray = [];
   const answerArray = [];
   const [speechStart, setSpeechStart] = useState(false);
+  const [placeholder, setPlaceholder] = useState("");
   const searchInput = document.getElementById("search-input");
   const [searchBarClass, setSearchBarClass] = useState("flex justify-center align-middle mt-40");
   const createRequestBody = () => {
@@ -96,11 +97,9 @@ const Searchbar = () => {
   };
 
   const handleSearch = () => {
-    if (!searchInput) {
-      console.log("!!!!!! No search input");
-      return searchInput.innerHTML = "Please enter your question here..."
+    if (!input) {
+      return setPlaceholder("Please enter your question here...")
     } else {
-      console.log("start searching....");
       search()
     }
   };
@@ -141,7 +140,7 @@ const Searchbar = () => {
       </div>
       <div className={searchBarClass}>
         <div className="w-1/2 h-12 border-2 border-grey-500 rounded flex justify-end">
-          <input class="inputBar" id="search-input" onInput={e=>setInput(e.target.value)} onKeyDown={handleKeyPress}  />
+          <input class="inputBar" id="search-input" placeholder={placeholder} onInput={e=>setInput(e.target.value)} onKeyDown={handleKeyPress}  />
           {!speechStart ?
             <div class="innerElement">
               { !browserSupportsSpeechRecognition ?
