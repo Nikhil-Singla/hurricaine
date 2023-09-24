@@ -24,12 +24,12 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 
 
 ## What is the name of your App?
-Hurric-AI-ne
+HurricAIne
 
 <br /><br />
 
 ## What does your app do?
-Hurric-AI-ne provides timely, easily accessible Natural Disaster information for people who desperately need it. The application also includes a knowledge library to assist with natural disaster readiness so that if disaster strikes, people can be prepared. 
+HurricAIne provides timely, easily accessible Natural Disaster information for people who desperately need it. The application also includes a knowledge library to assist with natural disaster readiness so that if disaster strikes, people can be prepared. 
 
 <br /><br />
 
