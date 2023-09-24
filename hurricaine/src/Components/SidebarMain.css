@@ -1,10 +1,19 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 36px;
-  height: 30px;
-  left: 36px;
-  top: 36px;
+  width: 3vw; /* Adjust the width based on the viewport width */
+  aspect-ratio: 36/30;
+  left: 3vw;
+  top: 3vh;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .bm-burger-button {
+    width: 8vw; /* Adjust the width for smaller screens */
+    left: 2vw; /* Adjust the position as needed */
+    top: 2vh; /* Adjust the position as needed */
+  }
 }
 
 /* Color/shape of burger icon bars */

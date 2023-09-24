@@ -155,7 +155,7 @@ const Searchbar = () => {
         {mapOpen ? <Map className="w-full" /> : <br />}
       </div>
       <div className={searchBarClass}>
-        <div className="w-1/2 h-12 border-2 border-grey-500 rounded flex justify-end">
+        <div className="searchBoundary">
           {/* defaultValue is needed for speech transcript */}
           <input className="inputBar" id="search-input" defaultValue={input} placeholder={placeholder} onInput={e => setInput(e.target.value)} onKeyDown={handleKeyPress} />
           {!speechStart ?
