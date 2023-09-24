@@ -17,7 +17,7 @@ const Searchbar = () => {
   const [searchBarClass, setSearchBarClass] = useState("flex justify-center align-middle mt-40");
   const createRequestBody = () => {
     const requestBody = [];
-    for (let i=0; i<inputArray.length-2; i++) {
+    for (let i = 0; i < inputArray.length - 2; i++) {
       requestBody.push({
         "role": "user",
         "content": inputArray[i]
@@ -31,7 +31,7 @@ const Searchbar = () => {
     };
     requestBody.push({
       "role": "user",
-      "content": inputArray[inputArray.length-1]
+      "content": inputArray[inputArray.length - 1]
     });
     console.log('requestBody');
     console.log(requestBody);
@@ -74,7 +74,7 @@ const Searchbar = () => {
       .then(function (response) {
         console.log('response');
         console.log(response.data);
-        setSearchBarClass("searchBar")
+        setSearchBarClass("searchBar");
 
         const searchResultAnswer = document.createElement("p");
         response.data.forEach(element => {
@@ -122,9 +122,11 @@ const Searchbar = () => {
 
   const listen = () => {
     if (speechStart === false) {
+      console.log("start listening");
       SpeechRecognition.startListening();
       setSpeechStart(true)
     } else {
+      console.log("stop listening");
       setInput(transcript)
       SpeechRecognition.stopListening()
       setSpeechStart(false)
@@ -140,30 +142,31 @@ const Searchbar = () => {
 
   return (
     <div className="convo-box">
-      <div className="overflow-scroll search-result-container" id="Scroller">
+      <div className="overflow-hidden search-result-container" id="Scroller">
         <div className="flex w-full justify-center">
           <div className="w-1/2 text-start" id="searchResult" >
           </div>
         </div>
-      {input.includes("where") ? <Map className="w-full" /> : <br/>}
+        {input.includes("where") ? <Map className="w-full" /> : <br />}
       </div>
       <div className={searchBarClass}>
         <div className="w-1/2 h-12 border-2 border-grey-500 rounded flex justify-end">
-          <input class="inputBar" id="search-input" placeholder={placeholder} onInput={e=>setInput(e.target.value)} onKeyDown={handleKeyPress}  />
+          {/* defaultValue is needed for speech transcript */}
+          <input class="inputBar" id="search-input" defaultValue={input} placeholder={placeholder} onInput={e => setInput(e.target.value)} onKeyDown={handleKeyPress} />
           {!speechStart ?
             <div class="innerElement">
-              { !browserSupportsSpeechRecognition ?
-                  <div class="innerElement">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="grey" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
-                    </svg>
-                  </div>
-                  :
-                  <div class="innerElement" onClick={listen}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
-                    </svg>
-                  </div>
+              {!browserSupportsSpeechRecognition ?
+                <div class="innerElement">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="grey" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                  </svg>
+                </div>
+                :
+                <div class="innerElement" onClick={listen}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+                  </svg>
+                </div>
               }
             </div>
             :
@@ -180,7 +183,7 @@ const Searchbar = () => {
           </div>
         </div>
       </div>
-      { !browserSupportsSpeechRecognition ? <div>Browser doesn't support speech recognition.</div> : "" }
+      {!browserSupportsSpeechRecognition ? <div>Browser doesn't support speech recognition.</div> : ""}
     </div>
   )
 }
