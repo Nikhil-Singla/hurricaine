@@ -9,8 +9,8 @@ import Map from "./Map";
 
 const Searchbar = () => {
   const [input, setInput] = useState("");
+  const [answerArray, setAnswerArray] = useState("");
   const inputArray = [];
-  const answerArray = [];
   const [speechStart, setSpeechStart] = useState(false);
   const [placeholder, setPlaceholder] = useState("");
   const searchInput = document.getElementById("search-input");
@@ -18,7 +18,11 @@ const Searchbar = () => {
   const [searchBarClass, setSearchBarClass] = useState("flex justify-center align-middle mt-40");
   const createRequestBody = () => {
     const requestBody = [];
-    for (let i = 0; i < inputArray.length - 2; i++) {
+    console.log('inputArray');
+    console.log(inputArray);
+    console.log('answerArray');
+    console.log(answerArray);
+    for (let i = 0; i < inputArray.length - 1; i++) {
       requestBody.push({
         "role": "user",
         "content": inputArray[i]
@@ -77,12 +81,23 @@ const Searchbar = () => {
         console.log(response.data);
         setSearchBarClass("searchBar");
 
-        const searchResultAnswer = document.createElement("p");
-        response.data.forEach(element => {
-          answerArray.push(element.content);
-          searchResultAnswer.innerHTML += element.content + " "
-        });
         const answerContainer = document.createElement("div");
+        const answerParagraph = document.createElement("div");
+        response.data.forEach(element => {
+          if (element) { // element is null sometimes
+            const searchResultAnswer = document.createElement("p");
+            const searchResultBreak = document.createElement("br");
+            searchResultBreak.style.height = "10px";
+            searchResultAnswer.innerHTML = element.content;
+            answerParagraph.appendChild(searchResultAnswer);
+            answerParagraph.appendChild(searchResultBreak);
+          }
+        });
+
+        setAnswerArray([...answerArray, response.data]);
+        console.log('answerArray in progress');
+        console.log(answerArray);
+
         answerContainer.style.display = 'flex';
         answerContainer.style.justifyContent = "flex-end";
         answerContainer.style.alignItems = 'center';
@@ -94,7 +109,7 @@ const Searchbar = () => {
         hurricaineIcon.style.width = '50px';
         hurricaineIcon.style.borderRadius = "50%";
 
-        answerContainer.appendChild(searchResultAnswer);
+        answerContainer.appendChild(answerParagraph);
         answerContainer.appendChild(hurricaineIcon);
 
         searchResult.appendChild(answerContainer);
@@ -147,7 +162,7 @@ const Searchbar = () => {
 
   return (
     <div className="convo-box">
-      <div className="overflow-scroll search-result-container" id="Scroller">
+      <div className="overflow-y-scroll search-result-container" id="Scroller">
         <div className="flex w-full justify-center">
           <div className="w-1/2 text-start" id="searchResult" >
           </div>
@@ -181,12 +196,12 @@ const Searchbar = () => {
               </svg>
             </div>
           }
-          <div className="searchElement -mr-2" onClick={()=>showMap(!mapOpen)}>
+          {/* <div className="searchElement -mr-2" onClick={()=>showMap(!mapOpen)}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-7">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
             </svg>
-          </div>
+          </div> */}
           <div className="searchElement" onClick={handleSearch}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
