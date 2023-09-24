@@ -18,7 +18,7 @@ const Geolocation = () => {
 
     useEffect(()=>{
       if (isGeolocationAvailable && isGeolocationEnabled && coords) {
-        axios.post('https://9079-23-228-186-78.ngrok-free.app/weather', {
+        axios.post('https://8656-23-228-186-78.ngrok-free.app/weather', {
           "latitude": coords.latitude,
           "longitude": coords.longitude
         })

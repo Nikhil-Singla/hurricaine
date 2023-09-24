@@ -71,7 +71,7 @@ const Searchbar = () => {
     const objDiv = document.getElementById("Scroller");
     objDiv.scrollTop = objDiv.scrollHeight;
 
-    axios.post('https://9079-23-228-186-78.ngrok-free.app/askgpt', createRequestBody())
+    axios.post('https://8656-23-228-186-78.ngrok-free.app/askgpt', createRequestBody())
       .then(function (response) {
         console.log('response');
         console.log(response.data);
