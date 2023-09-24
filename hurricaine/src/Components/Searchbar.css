@@ -26,3 +26,12 @@
 .search-result-container {
     max-height: 60vh;
 }
+
+.searchBar{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: middle;
+    margin-top: 20px;
+    width: 100%;
+}

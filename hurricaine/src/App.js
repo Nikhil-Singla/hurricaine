@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" id="outer-container">
-        <SidebarMain pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
+          <SidebarMain pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
         <div id="page-wrap">
           <Home />
         </div>

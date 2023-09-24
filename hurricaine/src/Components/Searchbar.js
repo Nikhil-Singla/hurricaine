@@ -6,6 +6,7 @@ import userProfileIcon from '../assets/userProfilePicture.png';
 import Tornado from '../assets/Tornado.png';
 import Map from "./Map";
 
+
 const Searchbar = () => {
   const [input, setInput] = useState("");
   const inputArray = [];
@@ -66,27 +67,34 @@ const Searchbar = () => {
     messageContainer.style.paddingBottom = "10px";
     searchResult.appendChild(messageContainer);
 
+    const objDiv = document.getElementById("Scroller");
+    objDiv.scrollTop = objDiv.scrollHeight;
+
     axios.post('https://9079-23-228-186-78.ngrok-free.app/askgpt', createRequestBody())
       .then(function (response) {
         console.log('response');
         console.log(response);
         answerArray.push(response.data);
-        setSearchBarClass("absolute bottom-0 flex justify-center align-middle my-20 w-full")
+        setSearchBarClass("searchBar")
 
         const searchResultAnswer = document.createElement("p");
         searchResultAnswer.innerHTML = response.data;
+
         const answerContainer = document.createElement("div");
         answerContainer.style.display = 'flex';
         answerContainer.style.justifyContent = "flex-end";
         answerContainer.style.alignItems = 'center';
         answerContainer.style.marginBottom = "20px";
+
         const hurricaineIcon = document.createElement("img");
         hurricaineIcon.src = Tornado;
         hurricaineIcon.style.height = '50px';
         hurricaineIcon.style.width = '50px';
         hurricaineIcon.style.borderRadius = "50%";
+
         answerContainer.appendChild(searchResultAnswer);
         answerContainer.appendChild(hurricaineIcon);
+
         searchResult.appendChild(answerContainer);
         
         setInput("")
@@ -131,9 +139,9 @@ const Searchbar = () => {
 
   return (
     <div className="convo-box">
-      <div className="overflow-scroll search-result-container">
+      <div className="overflow-scroll search-result-container" id="Scroller">
         <div className="flex w-full justify-center">
-          <div className="w-1/2 text-start" id="searchResult">
+          <div className="w-1/2 text-start" id="searchResult" >
           </div>
         </div>
       {input.includes("where") ? <Map className="w-full" /> : <br/>}

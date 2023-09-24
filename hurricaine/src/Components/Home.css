@@ -1,0 +1,9 @@
+.wholePage{
+    width: 60%;
+    height: 100vh;
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    background-color: #323232;
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.15), 0 6px 20px 0 rgba(255, 255, 255, 0.15);
+}
