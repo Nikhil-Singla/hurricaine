@@ -1,7 +1,5 @@
-# Welcome to Hack Midwest 2023!
+# Welcome to Hack Midwest 2023! This is the repo for Hurric-AI-ne project!
 <br /><br />
-
-
 ## Getting Started
 Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 1. Clone this repository and rename it to the name of your app or idea
@@ -14,25 +12,22 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 ## Who's on your team?
 *List the full names,  email address & Github username of your teammates*
 
-1. Mohammed Mukarram  || mohammed.mukarram@okstate.edu || mohdm2611
-2. Zachary Day || zday9@wgu.edu || zrday88
-3. Adam Khan || akhan5280@gmail.com || akhan5280
-4. Nikhil Singla || nikhil@ku.edu || Nikhil-Singla
-5. Lulu Cao || caolulu000@gmail.com || lulu-cao
+1. Nikhil Singla || Nikhil-Singla
+2. Mohammed Mukarram  || mohdm2611
+3. Zachary Day || zrday88
+4. Adam Khan || akhan5280
+5. Lulu Cao || lulu-cao
 
 <br /><br />
 
-
 ## What is the name of your App?
-HurricAIne
+Hurric-AI-ne
 
 <br /><br />
 
 ## What does your app do?
-HurricAIne provides timely, easily accessible Natural Disaster information for people who desperately need it. The application also includes a knowledge library to assist with natural disaster readiness so that if disaster strikes, people can be prepared. 
-
+HurricAIne provides timely, easily accessible Natural Disaster information for people who desperately need it. The application also includes a knowledge library to assist with natural disaster readiness so that if disaster strikes, people can be prepared, while providing real time solutions to any unexpected problems that may arise by using a large language model that has been adapted to assist in an emergency.
 <br /><br />
-
 
 ## What challenges are you building for? SELECT ALL THAT APPLY
 *See hackmidwest.com/#prizes for challenge details*
