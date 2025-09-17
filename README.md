@@ -1,16 +1,15 @@
-# Welcome to Hack Midwest 2023! This is the repo for Hurric-AI-ne project!
-<br /><br />
+# Welcome to Hack Midwest 2023! 
+This repo is one of the main testing forks for the Hurric-AI-ne project! The goal is to test out changes made to the app locally before they can be deployed to the main branch.
 ## Getting Started
 Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 1. Clone this repository and rename it to the name of your app or idea
 2. Make it **private**
 3. Add pr@kcitp.com as a user
 4. Populate the Team, App & Challenges info below and update as needed
-
-<br /><br />
+<br />
 
 ## Who's on your team?
-*List the full names,  email address & Github username of your teammates*
+*List the full names & Github username of your teammates*
 
 1. Nikhil Singla || Nikhil-Singla
 2. Mohammed Mukarram  || mohdm2611
@@ -18,7 +17,7 @@ Ensure you have reviewed the [Rules & FAQ](https://hackmidwest.com/#faq)
 4. Adam Khan || akhan5280
 5. Lulu Cao || lulu-cao
 
-<br /><br />
+<br />
 
 ## What is the name of your App?
 Hurric-AI-ne
